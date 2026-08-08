@@ -16,6 +16,18 @@ CREATE TABLE
     );
 
 -- ============================================
+-- COUNTRIES (Reference Table)
+-- ============================================
+CREATE TABLE
+    countries (
+        id SERIAL PRIMARY KEY,
+        name VARCHAR(100) NOT NULL UNIQUE,
+        code CHAR(2) UNIQUE,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    );
+
+-- ============================================
 -- USERS
 -- ============================================
 CREATE TABLE
