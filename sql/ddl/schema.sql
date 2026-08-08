@@ -135,4 +135,20 @@ CREATE TABLE
         actor_id INTEGER REFERENCES persons (id) ON DELETE SET NULL,
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
         updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        UNIQUE (movie_id, name)
+    );
+
+-- ============================================
+-- MOVIE APPEARANCES (Background/Crowd)
+-- ============================================
+CREATE TABLE
+    movie_appearances (
+        id SERIAL PRIMARY KEY,
+        movie_id INTEGER NOT NULL REFERENCES movies (id) ON DELETE CASCADE,
+        actor_id INTEGER NOT NULL REFERENCES persons (id) ON DELETE CASCADE,
+        role_description VARCHAR(255) NOT NULL,
+        character_name VARCHAR(255),
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        UNIQUE (movie_id, actor_id)
     );
