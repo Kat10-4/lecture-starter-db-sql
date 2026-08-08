@@ -164,3 +164,73 @@ CREATE TABLE
         updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
         PRIMARY KEY (user_id, movie_id)
     );
+
+-- ============================================
+-- UPDATED_AT TRIGGER FUNCTION
+-- ============================================
+
+CREATE OR REPLACE FUNCTION update_updated_at_column()
+RETURNS TRIGGER AS $$
+BEGIN
+    NEW.updated_at = CURRENT_TIMESTAMP;
+    RETURN NEW;
+END;
+$$ language 'plpgsql';
+
+-- ============================================
+-- UPDATED_AT TRIGGERS FOR ALL TABLES
+-- ============================================
+CREATE TRIGGER update_countries_updated_at 
+    BEFORE UPDATE ON countries 
+    FOR EACH ROW 
+    EXECUTE FUNCTION update_updated_at_column();
+
+CREATE TRIGGER update_genres_updated_at 
+    BEFORE UPDATE ON genres 
+    FOR EACH ROW 
+    EXECUTE FUNCTION update_updated_at_column();
+
+CREATE TRIGGER update_files_updated_at 
+    BEFORE UPDATE ON files 
+    FOR EACH ROW 
+    EXECUTE FUNCTION update_updated_at_column();
+
+CREATE TRIGGER update_persons_updated_at 
+    BEFORE UPDATE ON persons 
+    FOR EACH ROW 
+    EXECUTE FUNCTION update_updated_at_column();
+
+CREATE TRIGGER update_person_photos_updated_at 
+    BEFORE UPDATE ON person_photos 
+    FOR EACH ROW 
+    EXECUTE FUNCTION update_updated_at_column();
+
+CREATE TRIGGER update_movies_updated_at 
+    BEFORE UPDATE ON movies 
+    FOR EACH ROW 
+    EXECUTE FUNCTION update_updated_at_column();
+
+CREATE TRIGGER update_movie_genres_updated_at 
+    BEFORE UPDATE ON movie_genres 
+    FOR EACH ROW 
+    EXECUTE FUNCTION update_updated_at_column();
+
+CREATE TRIGGER update_movie_characters_updated_at 
+    BEFORE UPDATE ON movie_characters 
+    FOR EACH ROW 
+    EXECUTE FUNCTION update_updated_at_column();
+
+CREATE TRIGGER update_movie_appearances_updated_at 
+    BEFORE UPDATE ON movie_appearances 
+    FOR EACH ROW 
+    EXECUTE FUNCTION update_updated_at_column();
+
+CREATE TRIGGER update_users_updated_at 
+    BEFORE UPDATE ON users 
+    FOR EACH ROW 
+    EXECUTE FUNCTION update_updated_at_column();
+
+CREATE TRIGGER update_favorites_updated_at 
+    BEFORE UPDATE ON favorites 
+    FOR EACH ROW 
+    EXECUTE FUNCTION update_updated_at_column();
