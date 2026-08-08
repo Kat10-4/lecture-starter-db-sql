@@ -21,7 +21,7 @@ erDiagram
     users ||--o{ favorites : "has"
     movies ||--o{ favorites : "favorited_by"
     users |o--|| files : "avatar"
-    
+
     countries {
         int id PK
         string name
@@ -29,14 +29,14 @@ erDiagram
         timestamp created_at
         timestamp updated_at
     }
-    
+
     genres {
         int id PK
         string name
         timestamp created_at
         timestamp updated_at
     }
-    
+
     files {
         int id PK
         string file_name
@@ -46,7 +46,7 @@ erDiagram
         timestamp created_at
         timestamp updated_at
     }
-    
+
     persons {
         int id PK
         string first_name
@@ -59,7 +59,7 @@ erDiagram
         timestamp created_at
         timestamp updated_at
     }
-    
+
     person_photos {
         int person_id FK
         int file_id FK
@@ -67,12 +67,12 @@ erDiagram
         timestamp created_at
         timestamp updated_at
     }
-    
+
     movies {
         int id PK
         string title
         text description
-        decimal budget
+        numeric budget
         date release_date
         int duration_minutes
         int country_id FK
@@ -81,12 +81,12 @@ erDiagram
         timestamp created_at
         timestamp updated_at
     }
-    
+
     movie_genres {
-        int movie_id FK
-        int genre_id FK
+        int movie_id PK, FK
+        int genre_id PK, FK
     }
-    
+
     movie_characters {
         int id PK
         int movie_id FK
@@ -97,15 +97,17 @@ erDiagram
         timestamp created_at
         timestamp updated_at
     }
-    
+
     movie_appearances {
+        int id PK
         int movie_id FK
         int actor_id FK
         string role_description
+        string character_name
         timestamp created_at
         timestamp updated_at
     }
-    
+
     users {
         int id PK
         string username
@@ -117,10 +119,10 @@ erDiagram
         timestamp created_at
         timestamp updated_at
     }
-    
+
     favorites {
-        int user_id FK
-        int movie_id FK
+        int user_id PK, FK
+        int movie_id PK, FK
         timestamp created_at
         timestamp updated_at
     }
