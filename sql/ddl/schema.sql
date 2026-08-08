@@ -84,8 +84,8 @@ CREATE TABLE
 -- ============================================
 CREATE TABLE
     person_photos (
-        person_id INTEGER REFERENCES persons (id) ON DELETE CASCADE,
-        file_id INTEGER REFERENCES files (id) ON DELETE CASCADE,
+        person_id INTEGER NOT NULL REFERENCES persons (id) ON DELETE CASCADE,
+        file_id INTEGER NOT NULL REFERENCES files (id) ON DELETE CASCADE,
         is_primary BOOLEAN DEFAULT FALSE,
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
         updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -117,8 +117,8 @@ CREATE TABLE
 -- ============================================
 CREATE TABLE
     movie_genres (
-        movie_id INTEGER REFERENCES movies (id) ON DELETE CASCADE,
-        genre_id INTEGER REFERENCES genres (id) ON DELETE CASCADE,
+        movie_id INTEGER NOT NULL REFERENCES movies (id) ON DELETE CASCADE,
+        genre_id INTEGER NOT NULL REFERENCES genres (id) ON DELETE CASCADE,
         PRIMARY KEY (movie_id, genre_id)
     );
 
