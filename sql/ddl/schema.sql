@@ -78,6 +78,19 @@ CREATE TABLE
     );
 
 -- ============================================
+-- PERSON PHOTOS (Many-to-Many)
+-- ============================================
+CREATE TABLE
+    person_photos (
+        person_id INTEGER REFERENCES persons (id) ON DELETE CASCADE,
+        file_id INTEGER REFERENCES files (id) ON DELETE CASCADE,
+        is_primary BOOLEAN DEFAULT FALSE,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        PRIMARY KEY (person_id, file_id)
+    );
+
+-- ============================================
 -- MOVIES
 -- ============================================
 CREATE TABLE
