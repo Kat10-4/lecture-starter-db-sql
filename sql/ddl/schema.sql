@@ -109,3 +109,13 @@ CREATE TABLE
         CONSTRAINT chk_movie_release_date CHECK (release_date <= CURRENT_DATE),
         CONSTRAINT chk_movie_duration CHECK (duration_minutes BETWEEN 1 AND 600)
     );
+
+-- ============================================
+-- MOVIE GENRES (Many-to-Many)
+-- ============================================
+CREATE TABLE
+    movie_genres (
+        movie_id INTEGER REFERENCES movies (id) ON DELETE CASCADE,
+        genre_id INTEGER REFERENCES genres (id) ON DELETE CASCADE,
+        PRIMARY KEY (movie_id, genre_id)
+    );
