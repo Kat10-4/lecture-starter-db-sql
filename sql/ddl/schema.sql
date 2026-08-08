@@ -234,3 +234,43 @@ CREATE TRIGGER update_favorites_updated_at
     BEFORE UPDATE ON favorites 
     FOR EACH ROW 
     EXECUTE FUNCTION update_updated_at_column();
+
+-- ============================================
+-- INDEXES (Performance Optimization)
+-- ============================================
+-- 1. FOREIGN KEY INDEXES (10)
+CREATE INDEX idx_movies_country_id ON movies(country_id);
+CREATE INDEX idx_movies_director_id ON movies(director_id);
+CREATE INDEX idx_movie_characters_movie_id ON movie_characters(movie_id);
+CREATE INDEX idx_movie_characters_actor_id ON movie_characters(actor_id);
+CREATE INDEX idx_movie_appearances_movie_id ON movie_appearances(movie_id);
+CREATE INDEX idx_movie_appearances_actor_id ON movie_appearances(actor_id);
+CREATE INDEX idx_person_photos_person_id ON person_photos(person_id);
+CREATE INDEX idx_person_photos_file_id ON person_photos(file_id);
+CREATE INDEX idx_favorites_user_id ON favorites(user_id);
+CREATE INDEX idx_favorites_movie_id ON favorites(movie_id);
+
+-- 2. COMPOSITE INDEXES (3)
+CREATE INDEX idx_movies_country_release ON movies(country_id, release_date);
+CREATE INDEX idx_movie_characters_movie_role ON movie_characters(movie_id, role);
+CREATE INDEX idx_persons_country_gender ON persons(country_id, gender);
+CREATE INDEX idx_favorites_user_movie ON favorites(user_id, movie_id);
+
+-- 3. SEARCH INDEXES (7)
+CREATE INDEX idx_movies_release_date ON movies(release_date);
+CREATE INDEX idx_movies_duration_minutes ON movies(duration_minutes);
+CREATE INDEX idx_movies_title ON movies(title);
+CREATE INDEX idx_persons_last_name ON persons(last_name);
+CREATE INDEX idx_persons_first_name ON persons(first_name);
+CREATE INDEX idx_users_username ON users(username);
+CREATE INDEX idx_users_email ON users(email);
+
+-- 4. QUERY PERFORMANCE INDEXES (3)
+CREATE INDEX idx_movie_characters_actor_movie ON movie_characters(actor_id, movie_id);
+CREATE INDEX idx_movie_appearances_actor_movie ON movie_appearances(actor_id, movie_id);
+CREATE INDEX idx_movie_genres_movie_genre ON movie_genres(movie_id, genre_id);
+
+-- 5. ADDITIONAL INDEXES (2)
+CREATE INDEX idx_genres_name ON genres(name);
+CREATE INDEX idx_movie_genres_genre_id ON movie_genres(genre_id);
+
