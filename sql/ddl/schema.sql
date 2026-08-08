@@ -28,6 +28,17 @@ CREATE TABLE
     );
 
 -- ============================================
+-- GENRES (Reference Table)
+-- ============================================
+CREATE TABLE
+    genres (
+        id SERIAL PRIMARY KEY,
+        name VARCHAR(50) NOT NULL UNIQUE,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    );
+
+-- ============================================
 -- USERS
 -- ============================================
 CREATE TABLE
