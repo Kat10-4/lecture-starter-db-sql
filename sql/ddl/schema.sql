@@ -2,6 +2,11 @@
 -- MOVIE DATABASE SCHEMA
 -- ============================================
 -- ============================================
+-- ENUM TYPES
+-- ============================================
+CREATE TYPE person_gender AS ENUM ('Male', 'Female', 'Other');
+
+-- ============================================
 -- FILES (Storage Metadata)
 -- ============================================
 CREATE TABLE
@@ -52,6 +57,24 @@ CREATE TABLE
         avatar_file_id INTEGER REFERENCES files (id) ON DELETE SET NULL,
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
         updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    );
+
+-- ============================================
+-- PERSONS (Actors & Directors)
+-- ============================================
+CREATE TABLE
+    persons (
+        id SERIAL PRIMARY KEY,
+        first_name VARCHAR(100) NOT NULL,
+        last_name VARCHAR(100) NOT NULL,
+        biography TEXT,
+        date_of_birth DATE,
+        gender person_gender,
+        country_id INTEGER REFERENCES countries (id) ON DELETE SET NULL,
+        primary_photo_id INTEGER REFERENCES files (id) ON DELETE SET NULL,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        CONSTRAINT chk_person_birth_date CHECK (date_of_birth <= CURRENT_DATE)
     );
 
 -- ============================================
