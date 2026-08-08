@@ -6,6 +6,8 @@
 -- ============================================
 CREATE TYPE person_gender AS ENUM ('Male', 'Female', 'Other');
 
+CREATE TYPE character_role AS ENUM ('leading', 'supporting', 'background');
+
 -- ============================================
 -- FILES (Storage Metadata)
 -- ============================================
@@ -118,4 +120,19 @@ CREATE TABLE
         movie_id INTEGER REFERENCES movies (id) ON DELETE CASCADE,
         genre_id INTEGER REFERENCES genres (id) ON DELETE CASCADE,
         PRIMARY KEY (movie_id, genre_id)
+    );
+
+-- ============================================
+-- MOVIE CHARACTERS
+-- ============================================
+CREATE TABLE
+    movie_characters (
+        id SERIAL PRIMARY KEY,
+        movie_id INTEGER NOT NULL REFERENCES movies (id) ON DELETE CASCADE,
+        name VARCHAR(255) NOT NULL,
+        description TEXT,
+        role character_role NOT NULL,
+        actor_id INTEGER REFERENCES persons (id) ON DELETE SET NULL,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     );
