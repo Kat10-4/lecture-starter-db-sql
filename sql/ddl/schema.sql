@@ -152,3 +152,15 @@ CREATE TABLE
         updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
         UNIQUE (movie_id, actor_id)
     );
+
+-- ============================================
+-- FAVORITES (Many-to-Many)
+-- ============================================
+CREATE TABLE
+    favorites (
+        user_id INTEGER NOT NULL REFERENCES users (id) ON DELETE CASCADE,
+        movie_id INTEGER NOT NULL REFERENCES movies (id) ON DELETE CASCADE,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        PRIMARY KEY (user_id, movie_id)
+    );
