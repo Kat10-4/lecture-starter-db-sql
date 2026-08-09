@@ -73,7 +73,6 @@ CREATE TABLE
         date_of_birth DATE,
         gender person_gender,
         country_id INTEGER REFERENCES countries (id) ON DELETE SET NULL,
-        primary_photo_id INTEGER REFERENCES files (id) ON DELETE SET NULL,
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
         updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
         CONSTRAINT chk_person_birth_date CHECK (date_of_birth <= CURRENT_DATE)
@@ -273,4 +272,6 @@ CREATE INDEX idx_movie_genres_movie_genre ON movie_genres(movie_id, genre_id);
 -- 5. ADDITIONAL INDEXES (2)
 CREATE INDEX idx_genres_name ON genres(name);
 CREATE INDEX idx_movie_genres_genre_id ON movie_genres(genre_id);
+CREATE UNIQUE INDEX idx_person_photos_primary ON person_photos (person_id) WHERE is_primary = TRUE;
+
 
