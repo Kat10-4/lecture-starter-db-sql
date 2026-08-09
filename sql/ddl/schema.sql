@@ -76,6 +76,7 @@ CREATE TABLE
         biography TEXT,
         date_of_birth DATE,
         gender person_gender,
+        primary_photo_id INTEGER REFERENCES files(id) ON DELETE SET NULL,  
         country_id INTEGER REFERENCES countries (id) ON DELETE SET NULL,
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
         updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
