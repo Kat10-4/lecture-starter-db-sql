@@ -58,7 +58,11 @@ CREATE TABLE
         password_hash VARCHAR(255) NOT NULL,
         avatar_file_id INTEGER REFERENCES files (id) ON DELETE SET NULL,
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        CONSTRAINT chk_users_email_format 
+        CHECK (email ~* '^[A-Za-z0-9._%-]+@[A-Za-z0-9.-]+[.][A-Za-z]{2,}$'),
+        CONSTRAINT chk_users_username_format 
+        CHECK (username ~* '^[a-zA-Z0-9_]{3,50}$')
     );
 
 -- ============================================
