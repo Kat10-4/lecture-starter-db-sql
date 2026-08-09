@@ -148,8 +148,7 @@ CREATE TABLE
         role_description VARCHAR(255) NOT NULL,
         character_name VARCHAR(255),
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-        UNIQUE (movie_id, actor_id)
+        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     );
 
 -- ============================================
